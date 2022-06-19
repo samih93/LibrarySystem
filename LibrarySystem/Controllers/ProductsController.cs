@@ -54,16 +54,16 @@ namespace LibraryApi.Controllers
 
         // GET: api/Students/search?name=5
         [HttpGet("{search}")]
-        public async Task<ActionResult<Product>> search(string name)
+        public async Task<IEnumerable<Product>> search(string name)
         {
             try
             {
                 var students = await _productRepository.Search(name);
                 if (students.Any())
                 {
-                    return Ok(students);
+                    return students;
                 }
-                return NotFound();
+                return students;
             }
             catch (Exception)
             {
