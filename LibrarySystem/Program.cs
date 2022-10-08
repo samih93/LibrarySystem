@@ -3,6 +3,9 @@ using LibraryApi.Models.product;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add the memory cache services.
@@ -13,6 +16,16 @@ builder.Services.AddDbContext<LibraryDbContext>(opt => opt.UseInMemoryDatabase("
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
+// enable core origine
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://127.0.0.1:8081/"
+                                              );
+                      });
+});
 
 // Add services to the container.
 
@@ -33,6 +46,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors(MyAllowSpecificOrigins);
+
 
 app.MapControllers();
 

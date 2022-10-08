@@ -30,7 +30,7 @@ namespace LibraryApi.Controllers
 
         // GET: api/Students/5
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Product>> GetStudent(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             try
             {
