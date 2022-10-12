@@ -12,7 +12,6 @@ namespace LibraryModel
         public string name { get; set; }
         public string color { get; set; }
 
-        public int categoryId { get; set; }
-        public Category category { get; set; }
+      
     }
 }

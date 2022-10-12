@@ -22,6 +22,27 @@ namespace LibraryApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("LibraryModel.Category", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("LibraryModel.DetailsFacture", b =>
                 {
                     b.Property<int>("id")
@@ -78,6 +99,9 @@ namespace LibraryApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
+                    b.Property<int>("categoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
@@ -85,6 +109,8 @@ namespace LibraryApi.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("id");
+
+                    b.HasIndex("categoryId");
 
                     b.ToTable("Products");
                 });
@@ -124,6 +150,17 @@ namespace LibraryApi.Migrations
                     b.Navigation("facture");
 
                     b.Navigation("product");
+                });
+
+            modelBuilder.Entity("LibraryModel.Product", b =>
+                {
+                    b.HasOne("LibraryModel.Category", "category")
+                        .WithMany()
+                        .HasForeignKey("categoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("category");
                 });
 
             modelBuilder.Entity("LibraryModel.Stock", b =>

@@ -23,6 +23,19 @@ namespace LibraryApi.Models
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Facture> Factures { get; set; }
         public DbSet<DetailsFacture> DetailsFactures { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

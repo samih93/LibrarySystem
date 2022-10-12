@@ -18,7 +18,7 @@ namespace LibraryApi.Models.services
       
         public async Task<Product?> GetProduct(int id)
         {
-            Product? Product = await _appDbContext.Products.FirstOrDefaultAsync(e => e.id == id);
+            Product? Product = await _appDbContext.Products.Include(p=>p.category).FirstOrDefaultAsync(e => e.id == id);
 
             return Product;
         }
@@ -26,13 +26,13 @@ namespace LibraryApi.Models.services
         public async Task<IEnumerable<Product>> GetProducts()
         {
             
-            return await _appDbContext.Products.ToListAsync();
+            return await _appDbContext.Products.Include(c=>c.category).ToListAsync();
         }
 
       
         public async Task<IEnumerable<Product>> Search(string name)
         {
-            IQueryable<Product> Products = _appDbContext.Products!;
+            IQueryable<Product> Products = _appDbContext.Products!.Include(p => p.category);
 
             if (name != null)
             {
