@@ -8,14 +8,14 @@ namespace LibraryModel
 {
     public class DetailsFacture
     {
-        public int Id { get; set; }
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public int id { get; set; }
+        public int productId { get; set; }
+        public Product product { get; set; }
 
-        public int FactureId { get; set; }
-        public Facture Facture { get; set; }
+        public int factureId { get; set; }
+        public Facture facture { get; set; }
 
-        public int Qty { get; set; }
-        public double  TotalPrice { get; set; }
+        public int qty { get; set; }
+        public double  totalPrice { get; set; }
     }
 }

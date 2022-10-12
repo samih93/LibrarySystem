@@ -1,6 +1,6 @@
 ﻿using LibraryModel;
 
-namespace LibraryApi.Models.product
+namespace LibraryApi.Models.services
 {
     public interface IProductRepository
     {

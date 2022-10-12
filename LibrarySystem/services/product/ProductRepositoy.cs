@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryApi.Models.product
+namespace LibraryApi.Models.services
 {
     public class ProductRepository : IProductRepository
     {
@@ -18,7 +18,7 @@ namespace LibraryApi.Models.product
       
         public async Task<Product?> GetProduct(int id)
         {
-            Product? Product = await _appDbContext.Products.FirstOrDefaultAsync(e => e.Id == id);
+            Product? Product = await _appDbContext.Products.FirstOrDefaultAsync(e => e.id == id);
 
             return Product;
         }
@@ -36,7 +36,7 @@ namespace LibraryApi.Models.product
 
             if (name != null)
             {
-                Products = Products.Where(e => e.Name!.Contains(name));
+                Products = Products.Where(e => e.name!.Contains(name));
             }
 
             return await Products.ToListAsync();

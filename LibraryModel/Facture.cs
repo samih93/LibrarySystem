@@ -8,11 +8,11 @@ namespace LibraryModel
 {
     public class Facture
     {
-        public int Id { get; set; }
-        public double FacturePrice { get; set; }
-        public DateTime FactureDate { get; set; }
+        public int id { get; set; }
+        public double facturePrice { get; set; }
+        public DateTime factureDate { get; set; }
 
-        public ICollection<DetailsFacture> DetailsFactures { get; set; }
+        public ICollection<DetailsFacture> detailsFactures { get; set; }
 
     }
 }

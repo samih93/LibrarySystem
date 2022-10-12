@@ -1,5 +1,5 @@
 using LibraryApi.Models;
-using LibraryApi.Models.product;
+using LibraryApi.Models.services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
