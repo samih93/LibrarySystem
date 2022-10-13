@@ -79,7 +79,7 @@ namespace LibraryApi.Controllers
         public async Task<Product> InsertProduct(Product product)
         {
             
-           return await _productRepository.InsertProduct(product);
+           return await _productRepository.AddProduct(product);
 
         }
 

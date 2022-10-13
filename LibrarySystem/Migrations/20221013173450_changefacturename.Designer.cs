@@ -4,6 +4,7 @@ using LibraryApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryApi.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221013173450_changefacturename")]
+    partial class changefacturename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace LibraryApi.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("LibraryModel.DetailsReceipt", b =>
+            modelBuilder.Entity("LibraryModel.DetailsFacture", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -51,19 +53,28 @@ namespace LibraryApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
+                    b.Property<int>("factureId")
+                        .HasColumnType("int");
+
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<int>("receiptId")
+                    b.Property<int>("qty")
                         .HasColumnType("int");
+
+                    b.Property<int>("receiptid")
+                        .HasColumnType("int");
+
+                    b.Property<double>("totalPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("id");
 
                     b.HasIndex("productId");
 
-                    b.HasIndex("receiptId");
+                    b.HasIndex("receiptid");
 
-                    b.ToTable("DetailsReceipts");
+                    b.ToTable("DetailsFactures");
                 });
 
             modelBuilder.Entity("LibraryModel.Product", b =>
@@ -83,9 +94,6 @@ namespace LibraryApi.Migrations
                     b.Property<double>("price")
                         .HasColumnType("float");
 
-                    b.Property<double>("qty")
-                        .HasColumnType("float");
-
                     b.HasKey("id");
 
                     b.HasIndex("categoryId");
@@ -101,10 +109,10 @@ namespace LibraryApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<DateTime>("receiptDate")
+                    b.Property<DateTime>("factureDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("receiptPrice")
+                    b.Property<double>("facturePrice")
                         .HasColumnType("float");
 
                     b.HasKey("id");
@@ -112,39 +120,39 @@ namespace LibraryApi.Migrations
                     b.ToTable("Receipts");
                 });
 
-            modelBuilder.Entity("LibraryModel.DetailsReceipt", b =>
+            modelBuilder.Entity("LibraryModel.DetailsFacture", b =>
                 {
-                    b.HasOne("LibraryModel.Product", "Product")
+                    b.HasOne("LibraryModel.Product", "product")
                         .WithMany()
                         .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LibraryModel.Receipt", "Receipt")
-                        .WithMany("Detailsreceipts")
-                        .HasForeignKey("receiptId")
+                    b.HasOne("LibraryModel.Receipt", "receipt")
+                        .WithMany("detailsFactures")
+                        .HasForeignKey("receiptid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("product");
 
-                    b.Navigation("Receipt");
+                    b.Navigation("receipt");
                 });
 
             modelBuilder.Entity("LibraryModel.Product", b =>
                 {
-                    b.HasOne("LibraryModel.Category", "Category")
+                    b.HasOne("LibraryModel.Category", "category")
                         .WithMany()
                         .HasForeignKey("categoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("category");
                 });
 
             modelBuilder.Entity("LibraryModel.Receipt", b =>
                 {
-                    b.Navigation("Detailsreceipts");
+                    b.Navigation("detailsFactures");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,7 +7,7 @@ namespace LibraryApi.services.category
         Task<IEnumerable<Category>> GetCategories();
         Task<Category?> GetCategory(int id);
         Task<IEnumerable<Category>> Search(string name);
-        Task<Category> InsertCategory(Category Category);
+        Task<Category> AddCategory(Category Category);
         Task DeleteCategory(int CategoryID);
         Task<Category> UpdateCategory(Category Category);
     }

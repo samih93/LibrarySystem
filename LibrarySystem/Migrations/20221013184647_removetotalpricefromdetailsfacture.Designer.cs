@@ -4,6 +4,7 @@ using LibraryApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryApi.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221013184647_removetotalpricefromdetailsfacture")]
+    partial class removetotalpricefromdetailsfacture
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,37 +116,37 @@ namespace LibraryApi.Migrations
 
             modelBuilder.Entity("LibraryModel.DetailsReceipt", b =>
                 {
-                    b.HasOne("LibraryModel.Product", "Product")
+                    b.HasOne("LibraryModel.Product", "product")
                         .WithMany()
                         .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LibraryModel.Receipt", "Receipt")
-                        .WithMany("Detailsreceipts")
+                    b.HasOne("LibraryModel.Receipt", "receipt")
+                        .WithMany("detailsreceipts")
                         .HasForeignKey("receiptId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("product");
 
-                    b.Navigation("Receipt");
+                    b.Navigation("receipt");
                 });
 
             modelBuilder.Entity("LibraryModel.Product", b =>
                 {
-                    b.HasOne("LibraryModel.Category", "Category")
+                    b.HasOne("LibraryModel.Category", "category")
                         .WithMany()
                         .HasForeignKey("categoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("category");
                 });
 
             modelBuilder.Entity("LibraryModel.Receipt", b =>
                 {
-                    b.Navigation("Detailsreceipts");
+                    b.Navigation("detailsreceipts");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,9 +14,12 @@ namespace LibraryApi.services.category
         {
             _appDbContext = appDbContext;
         }
-        public Task DeleteCategory(int CategoryID)
+        public async Task DeleteCategory(int CategoryID)
         {
-            throw new NotImplementedException();
+            Category? category = _appDbContext.Categories.Find(CategoryID);
+            if (category != null)
+                _appDbContext.Categories.Remove(category);
+            await _appDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Category>> GetCategories()
@@ -24,24 +27,37 @@ namespace LibraryApi.services.category
             return await _appDbContext.Categories.ToListAsync();
         }
 
-        public Task<Category?> GetCategory(int id)
+        public async Task<Category?> GetCategory(int id)
         {
-            throw new NotImplementedException();
+            Category? category =await _appDbContext.Categories.FirstOrDefaultAsync(c=>c.id==id);
+            return category;
+
         }
 
-        public Task<Category> InsertCategory(Category Category)
+        public async Task<Category> AddCategory(Category category)
         {
-            throw new NotImplementedException();
+            _appDbContext.Categories.Add(category);
+            await _appDbContext.SaveChangesAsync();
+            return category;
         }
 
-        public Task<IEnumerable<Category>> Search(string name)
+        public async Task<IEnumerable<Category>> Search(string name)
         {
-            throw new NotImplementedException();
+            IQueryable<Category> categories = _appDbContext.Categories;
+
+            if (name != null)
+            {
+                categories = categories.Where(c => c.name!.Contains(name));
+            }
+
+            return await categories.ToListAsync();
         }
 
-        public Task<Category> UpdateCategory(Category Category)
+        public async Task<Category> UpdateCategory(Category Category)
         {
-            throw new NotImplementedException();
+            _appDbContext.Entry(Category).State = EntityState.Modified;
+            await _appDbContext.SaveChangesAsync();
+            return Category;
         }
     }
 }

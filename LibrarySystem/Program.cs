@@ -1,6 +1,7 @@
 using LibraryApi.Models;
 using LibraryApi.Models.services;
 using LibraryApi.services.category;
+using LibraryApi.services.receipt;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<LibraryDbContext>(opt => opt.UseInMemoryDatabase("
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategeryRepository>();
+builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
+builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
 
 // enable core origine
 builder.Services.AddCors(options =>

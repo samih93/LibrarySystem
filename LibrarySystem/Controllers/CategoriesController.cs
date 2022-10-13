@@ -17,12 +17,39 @@ namespace LibraryApi.Controllers
 
         // GET: api/categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Category>>> Getcategories()
         {
-            // if(await _productRepository.GetProducts()==null)
-            //     return NotFound();
+            
 
             return Ok(await _categoryRepository.GetCategories());
+        }
+
+        // POST: api/categories
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<Category> InsertCategory(Category category)
+        {
+
+            return await _categoryRepository.AddCategory(category);
+
+        }
+
+        [HttpPut]
+        // put: api/categories
+        public async Task<Category> UpdateCategory(Category category)
+        {
+
+            return await _categoryRepository.UpdateCategory(category);
+
+        }
+
+        [HttpDelete]
+        // put: api/categories
+        public async Task DeleteCategory(int id)
+        {
+
+            await _categoryRepository.DeleteCategory(id);
+
         }
     }
 }
