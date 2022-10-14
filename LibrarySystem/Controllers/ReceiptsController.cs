@@ -13,10 +13,9 @@ namespace LibraryApi.Controllers
     {
 
         private readonly IReceiptRepository _receiptRepository;
-        private readonly IMapper _mapper;
 
 
-        public ReceiptsController(IReceiptRepository receiptRepository, IMapper mapper)
+        public ReceiptsController(IReceiptRepository receiptRepository)
         {
             _receiptRepository = receiptRepository;
             _mapper = mapper;
@@ -34,7 +33,7 @@ namespace LibraryApi.Controllers
         // POST: api/Receipts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<Receipt> InsertReceipt(Receipt receipt)
+        public async Task<Receipt> AddReceipt(Receipt receipt)
         {
 
             return await _receiptRepository.AddReceipt(receipt);
