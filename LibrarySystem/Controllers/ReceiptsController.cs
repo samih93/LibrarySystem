@@ -18,7 +18,6 @@ namespace LibraryApi.Controllers
         public ReceiptsController(IReceiptRepository receiptRepository)
         {
             _receiptRepository = receiptRepository;
-            _mapper = mapper;
         }
         // GET: api/Receipts
         [HttpGet]
