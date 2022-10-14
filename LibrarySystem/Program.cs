@@ -1,9 +1,14 @@
+using AutoMapper;
+using LibraryApi.helper;
 using LibraryApi.Models;
 using LibraryApi.Models.services;
 using LibraryApi.services.category;
 using LibraryApi.services.receipt;
+using LibraryModel;
+using LibraryModel.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -15,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Unable to resolve service for type 'StudentApi.Models.AppDbContext' while attempting to activate 'StudentApi.StudentsController'.
 builder.Services.AddDbContext<LibraryDbContext>(opt => opt.UseInMemoryDatabase("LibraryDb"));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategeryRepository>();

@@ -1,5 +1,7 @@
-﻿using LibraryApi.services.receipt;
+﻿using AutoMapper;
+using LibraryApi.services.receipt;
 using LibraryModel;
+using LibraryModel.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +13,22 @@ namespace LibraryApi.Controllers
     {
 
         private readonly IReceiptRepository _receiptRepository;
+        private readonly IMapper _mapper;
 
-        public ReceiptsController(IReceiptRepository receiptRepository)
+
+        public ReceiptsController(IReceiptRepository receiptRepository, IMapper mapper)
         {
             _receiptRepository = receiptRepository;
+            _mapper = mapper;
         }
         // GET: api/Receipts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Receipt>>> GetReceipts()
+        public async Task<ActionResult<List<Receipt>>> GetReceipts()
         {
+            var receipt =  await _receiptRepository.GetReceipts();
+        
 
-            return Ok(await _receiptRepository.GetReceipts());
+            return Ok(receipt);
         }
 
         // POST: api/Receipts
@@ -45,11 +52,11 @@ namespace LibraryApi.Controllers
                     return NotFound();
                 }
 
-                var result = await _receiptRepository.GetReceipt(id);
+                var result = await _receiptRepository.GetReceipt(id) ;
 
                 if (result == null) return NotFound();
 
-                return  result;
+                return  Ok(result);
             }
             catch (Exception)
             {

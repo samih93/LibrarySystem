@@ -1,4 +1,5 @@
-﻿using LibraryApi.Models;
+﻿using AutoMapper;
+using LibraryApi.Models;
 using LibraryModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,12 +25,12 @@ namespace LibraryApi.services.receipt
 
         public async Task<Receipt?> GetReceipt(int receiptId)
         {
-            Receipt? receipt = await _appDbContext.Receipts.FirstOrDefaultAsync(r => r.id == receiptId);
+            Receipt? receipt =await _appDbContext.Receipts.FirstOrDefaultAsync(r => r.id == receiptId);
           
             return receipt;
         }
 
-        public async Task<IEnumerable<Receipt>> GetReceipts()
+        public async Task<List<Receipt>> GetReceipts()
         {
             return await _appDbContext.Receipts.Include(r=>r.Detailsreceipts).ToListAsync();
         }
