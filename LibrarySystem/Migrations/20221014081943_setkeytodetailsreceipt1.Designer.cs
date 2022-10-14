@@ -4,6 +4,7 @@ using LibraryApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryApi.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221014081943_setkeytodetailsreceipt1")]
+    partial class setkeytodetailsreceipt1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,13 +47,18 @@ namespace LibraryApi.Migrations
 
             modelBuilder.Entity("LibraryModel.DetailsReceipt", b =>
                 {
+                    b.Property<int>("id")
+                        .HasColumnType("int");
+
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
                     b.Property<int>("receiptId")
                         .HasColumnType("int");
 
-                    b.HasKey("productId", "receiptId");
+                    b.HasKey("id", "productId", "receiptId");
+
+                    b.HasIndex("productId");
 
                     b.HasIndex("receiptId");
 
