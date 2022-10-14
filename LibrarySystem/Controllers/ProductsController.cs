@@ -76,7 +76,7 @@ namespace LibraryApi.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<Product> InsertProduct(Product product)
+        public async Task<Product> AddProduct(Product product)
         {
             
            return await _productRepository.AddProduct(product);

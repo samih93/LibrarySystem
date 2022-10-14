@@ -33,5 +33,30 @@ namespace LibraryApi.Controllers
             return await _receiptRepository.AddReceipt(receipt);
 
         }
+
+        // GET: api/Receipts/5
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Receipt>> GetReceipt(int id)
+        {
+            try
+            {
+                if (await _receiptRepository.GetReceipts() == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await _receiptRepository.GetReceipt(id);
+
+                if (result == null) return NotFound();
+
+                return  result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
     }
 }

@@ -22,9 +22,10 @@ namespace LibraryApi.services.receipt
 
         }
 
-        public Task<Receipt> GetReceipt(int receiptId)
+        public async Task<Receipt?> GetReceipt(int receiptId)
         {
-            throw new NotImplementedException();
+            Receipt? receipt =  await  _appDbContext.Receipts.FirstOrDefaultAsync(r => r.id == receiptId);
+            return receipt;
         }
 
         public async Task<IEnumerable<Receipt>> GetReceipts()

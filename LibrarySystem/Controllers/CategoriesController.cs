@@ -27,7 +27,7 @@ namespace LibraryApi.Controllers
         // POST: api/categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<Category> InsertCategory(Category category)
+        public async Task<Category> AddCategory(Category category)
         {
 
             return await _categoryRepository.AddCategory(category);
