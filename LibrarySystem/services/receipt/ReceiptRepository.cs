@@ -24,7 +24,8 @@ namespace LibraryApi.services.receipt
 
         public async Task<Receipt?> GetReceipt(int receiptId)
         {
-            Receipt? receipt =  await  _appDbContext.Receipts.FirstOrDefaultAsync(r => r.id == receiptId);
+            Receipt? receipt = await _appDbContext.Receipts.FirstOrDefaultAsync(r => r.id == receiptId);
+          
             return receipt;
         }
 

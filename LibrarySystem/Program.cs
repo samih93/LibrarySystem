@@ -35,6 +35,15 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// this is the error without AddControllersWithViews 
+//  System.Text.Json.JsonException: A possible object cycle was detected.
+//  This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32.
+//  Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles.
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

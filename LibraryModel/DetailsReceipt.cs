@@ -13,6 +13,8 @@ namespace LibraryModel
         public int productId { get; set; }
         public Product? Product { get; set; }
 
+
+        public double qty { get; set; }
         public int receiptId { get; set; }
         public Receipt? Receipt { get; set; }
 
