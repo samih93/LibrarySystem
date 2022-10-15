@@ -7,5 +7,6 @@ namespace LibraryApi.services.detailsreceipt
         Task<List<DetailsReceipt>> GetDetailsReceiptByReceiptId(int receiptId);
 
         Task AddDetailsReceipt(List<DetailsReceipt> detailsReceipts);
+
     }
 }

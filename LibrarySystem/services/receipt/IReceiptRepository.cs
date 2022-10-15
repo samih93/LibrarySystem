@@ -9,5 +9,9 @@ namespace LibraryApi.services.receipt
         Task<Receipt?> GetReceipt(int receiptId);
 
         Task<List<Receipt>> GetReceipts();
+
+        Task<List<Receipt>> GetReceiptsByDat(DateTime date);
+
+        Task<double> GetDailyInCome(DateTime date);
     }
 }

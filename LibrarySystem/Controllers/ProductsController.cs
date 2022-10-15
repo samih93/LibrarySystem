@@ -101,5 +101,17 @@ namespace LibraryApi.Controllers
 
         }
 
+        // GET: api/Receipts/GetMostSellingProduct?date=
+        [HttpGet("GetMostSellingProduct")]
+
+        public async Task<ActionResult<double>> GetMostSellingProduct(DateTime date)
+        {
+            var receipt = await _productRepository.GetMostSellingProducts(date);
+
+            return Ok(receipt);
+        }
+
+
+
     }
 }

@@ -34,6 +34,31 @@ namespace LibraryApi.Controllers
 
         }
 
+        // GET: api/categories/5
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Category>> GetCategory(int id)
+        {
+            try
+            {
+                if (await _categoryRepository.GetCategories() == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await _categoryRepository.GetCategory(id);
+
+                if (result == null) return NotFound();
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+
         [HttpPut]
         // put: api/categories
         public async Task<Category> UpdateCategory(Category category)

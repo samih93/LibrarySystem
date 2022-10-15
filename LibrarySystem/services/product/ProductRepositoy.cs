@@ -70,5 +70,10 @@ namespace LibraryApi.Models.services
 
         }
 
+        public async Task<List<Product>> GetMostSellingProducts(DateTime date)
+        {
+            List<Product> products = new List<Product>();
+            return products;
+        }
     }
 }

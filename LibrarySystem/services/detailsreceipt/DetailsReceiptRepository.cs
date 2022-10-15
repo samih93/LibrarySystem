@@ -20,6 +20,7 @@ namespace LibraryApi.services.detailsreceipt
                 _appDbContext.DetailsReceipts.AddRange(new DetailsReceipt { 
                     productId = item.productId,
                     qty = item.qty,
+                    price = item.price,
                     receiptId = item.receiptId
                 });
             }

@@ -23,6 +23,12 @@ namespace LibraryApi.services.receipt
 
         }
 
+        public async Task<double> GetDailyInCome(DateTime date)
+        {
+            return await _appDbContext.Receipts.Where(r => r.receiptDate.Year == date.Year && r.receiptDate.Month == date.Month && r.receiptDate.Day == date.Day).SumAsync(r => r.receiptPrice);
+
+        }
+
         public async Task<Receipt?> GetReceipt(int receiptId)
         {
             Receipt? receipt =await _appDbContext.Receipts.FirstOrDefaultAsync(r => r.id == receiptId);
@@ -33,6 +39,11 @@ namespace LibraryApi.services.receipt
         public async Task<List<Receipt>> GetReceipts()
         {
             return await _appDbContext.Receipts.Include(r=>r.Detailsreceipts).ToListAsync();
+        }
+
+        public async Task<List<Receipt>> GetReceiptsByDat(DateTime date)
+        {
+            return await _appDbContext.Receipts.Where(r => r.receiptDate.Year == date.Year  && r.receiptDate.Month ==date.Month && r.receiptDate.Day ==date.Day).ToListAsync();
         }
     }
 }

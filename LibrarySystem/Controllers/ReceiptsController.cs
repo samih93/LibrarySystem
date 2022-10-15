@@ -23,11 +23,33 @@ namespace LibraryApi.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Receipt>>> GetReceipts()
         {
-            var receipt =  await _receiptRepository.GetReceipts();
-        
+            var receipt = await _receiptRepository.GetReceipts();
 
             return Ok(receipt);
         }
+
+        // GET: api/Receipts/GetReceiptsByDay?date=
+        [HttpGet("GetReceiptsByDay")]
+        public async Task<ActionResult<List<Receipt>>> GetReceiptsByDay(DateTime date)
+        {
+            var receipt = await _receiptRepository.GetReceiptsByDat(date);
+
+            return Ok(receipt);
+        }
+
+
+        // GET: api/Receipts/GetDailyIncome?date=
+        [HttpGet("GetDailyIncome")]
+
+        public async Task<ActionResult<double>> GetDailyIncome(DateTime date)  
+        {
+            var receipt = await _receiptRepository.GetDailyInCome(date);
+
+            return Ok(receipt);
+        }
+
+
+
 
         // POST: api/Receipts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
