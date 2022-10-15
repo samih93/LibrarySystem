@@ -3,6 +3,7 @@ using LibraryApi.helper;
 using LibraryApi.Models;
 using LibraryApi.Models.services;
 using LibraryApi.services.category;
+using LibraryApi.services.detailsreceipt;
 using LibraryApi.services.receipt;
 using LibraryModel;
 using LibraryModel.Dtos;
@@ -25,7 +26,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategeryRepository>();
 builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
-builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
+builder.Services.AddScoped<IDetailsReceiptRepository, DetailsReceiptRepository>();
 
 // enable core origine
 builder.Services.AddCors(options =>

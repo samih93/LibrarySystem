@@ -22,6 +22,15 @@ namespace LibraryApi.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DetailsReceipt>().HasKey(dr => new { dr.productId, dr.receiptId });
+            //    modelBuilder.Entity<DetailsReceipt>()
+            //.HasOne(bc => bc.Product)
+            //.WithMany(b => b.Detailsreceipts)
+            //.HasForeignKey(bc => bc.productId);
+
+            //    modelBuilder.Entity<DetailsReceipt>()
+            //        .HasOne(bc => bc.Receipt)
+            //        .WithMany(c => c.Detailsreceipts)
+            //        .HasForeignKey(bc => bc.receiptId);
         }
 
         public DbSet<Product> Products { get; set; }
