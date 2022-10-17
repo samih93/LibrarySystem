@@ -11,6 +11,6 @@ namespace LibraryApi.Models.services
         Task DeleteProduct(int productID);
         Task<Product> UpdateProduct(Product product);
 
-        Task<List<Product>> GetMostSellingProducts(DateTime date);
+        Task<List<Product>> GetMostSellingProducts(DateTime? date);
     }
 }

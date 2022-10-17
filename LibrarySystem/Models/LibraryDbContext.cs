@@ -8,6 +8,9 @@ namespace LibraryApi.Models
     {
         protected readonly IConfiguration Configuration;
 
+        public LibraryDbContext() { 
+        }
+
         public LibraryDbContext(IConfiguration configuration)
         {
             Configuration = configuration;

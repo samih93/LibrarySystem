@@ -1,6 +1,9 @@
-﻿using LibraryModel;
+﻿using LibraryApi.helper;
+using LibraryModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LibraryApi.Models.services
 {
@@ -70,9 +73,48 @@ namespace LibraryApi.Models.services
 
         }
 
-        public async Task<List<Product>> GetMostSellingProducts(DateTime date)
+        public async Task<List<Product>> GetMostSellingProducts(DateTime? date=null)
         {
             List<Product> products = new List<Product>();
+            //if date null we need set current month
+            DateTime currentdate = ((DateTime)date).Year!=1 ? (DateTime) date :   DateTime.Now;
+
+
+
+            //query =    ($"select p.id , p.name, sum(dr.qty) as qty from Products as p join DetailsReceipts as dr on p.id=dr.productId join Receipts as r on r.id=dr.receiptId " +
+            // $"where MONTH(r.receiptDate) = {d.Month} and  YEAR(r.receiptDate) = {d.Year}" +
+            //"group by p.id, p.name order by qty desc", x => new Product { name = (string)x[1], qty = (int)x[2] });
+
+
+            var query = (from product in this._appDbContext.Products
+             from dr in this._appDbContext.DetailsReceipts
+             from r in this._appDbContext.Receipts
+             where product.id == dr.productId && dr.receiptId == r.id
+             where r.receiptDate.Year == currentdate.Year && r.receiptDate.Month == currentdate.Month
+             select new { id = product.id, productname = product.name, qty = dr.qty }).AsEnumerable().GroupBy(c => c.id).Take(10);
+
+
+
+            foreach (var item in query)
+            {
+                var groupKey = item.Key;
+                double qty = 0;
+                Product p = new Product();
+                foreach (var subitem in item)
+                {
+
+                    p.id = subitem.id;
+                    p.name = subitem.productname;
+                    
+                    qty += subitem.qty;
+                   
+                }
+                p.qty = qty;
+                products.Add(p);
+
+            }
+
+
             return products;
         }
     }
