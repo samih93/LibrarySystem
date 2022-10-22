@@ -16,8 +16,8 @@ namespace LibraryApi.Controllers
             _detailsReceiptRepository = detailsReceiptRepository;
         }
         // GET: api/DetailsReceipt
-        [HttpGet]
-        public async Task<ActionResult<List<DetailsReceipt>>> GetDetailsReceiptByReceiptId(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<List<DetailsReceipt>>> GetDetailsReceipt(int id)
         {
             // if(await _productRepository.GetProducts()==null)
             //     return NotFound();

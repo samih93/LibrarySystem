@@ -29,7 +29,7 @@ namespace LibraryApi.services.detailsreceipt
 
         public async Task<List<DetailsReceipt>> GetDetailsReceiptByReceiptId(int receiptId)
         {
-            return await _appDbContext.DetailsReceipts.Where(dr => dr.receiptId == receiptId).ToListAsync();
+            return await _appDbContext.DetailsReceipts.Where(dr => dr.receiptId == receiptId).Include(dr=>dr.Product).ToListAsync();
         }
     }
 }
