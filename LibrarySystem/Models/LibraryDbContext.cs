@@ -40,6 +40,7 @@ namespace LibraryApi.Models
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<DetailsReceipt> DetailsReceipts{ get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<PrinterModel> Printer { get; set; }
 
 
 
