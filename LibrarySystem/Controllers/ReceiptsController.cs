@@ -27,6 +27,14 @@ namespace LibraryApi.Controllers
 
             return Ok(receipt);
         }
+        [HttpDelete]
+        // put: api/Receipts
+        public async Task DeleteProduct(int id)
+        {
+
+            await _receiptRepository.DeleteReceipt(id);
+
+        }
 
         // GET: api/Receipts/GetReceiptsByDay?date=
         [HttpGet("GetReceiptsByDay")]
@@ -47,6 +55,16 @@ namespace LibraryApi.Controllers
 
             return Ok(receipt);
         }
+
+        // GET: api/Receipts/GetDailySaleinMonth
+        [HttpGet("GetDailySaleinMonth")]
+
+        public async Task<ActionResult<List<DailySale>>> GetDailySaleinMonth(DateTime date)
+        {
+             return Ok(await _receiptRepository.GetDailyInComeInMonth(date));
+
+        }
+
 
 
 

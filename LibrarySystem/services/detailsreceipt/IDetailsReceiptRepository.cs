@@ -9,5 +9,7 @@ namespace LibraryApi.services.detailsreceipt
 
         Task AddDetailsReceipt(List<DetailsReceipt> detailsReceipts);
 
+        Task refundItems(List<DetailsReceipt> detailsReceipts);
+
     }
 }

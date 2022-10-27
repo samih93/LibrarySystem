@@ -32,5 +32,12 @@ namespace LibraryApi.Controllers
             await _detailsReceiptRepository.AddDetailsReceipt(detailsReceipts);
         }
 
+        [HttpDelete]
+        [ActionName("refundItems")]
+        public async Task refundItems(List<DetailsReceipt> detailsReceipts)
+        {
+            await _detailsReceiptRepository.refundItems(detailsReceipts);
+        }
+
     }
 }

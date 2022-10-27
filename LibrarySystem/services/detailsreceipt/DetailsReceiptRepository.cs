@@ -31,5 +31,16 @@ namespace LibraryApi.services.detailsreceipt
         {
             return await _appDbContext.DetailsReceipts.Where(dr => dr.receiptId == receiptId).Include(dr=>dr.Product).ToListAsync();
         }
+
+        public async Task refundItems(List<DetailsReceipt> detailsReceipts)
+        {
+            
+                foreach (var item in detailsReceipts)
+                {
+                    _appDbContext.DetailsReceipts.Remove(item);
+                }
+            
+            await _appDbContext.SaveChangesAsync();
+        }
     }
 }

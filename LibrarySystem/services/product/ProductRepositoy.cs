@@ -86,6 +86,7 @@ namespace LibraryApi.Models.services
             //"group by p.id, p.name order by qty desc", x => new Product { name = (string)x[1], qty = (int)x[2] });
 
 
+            /// get list of selling product group by product id 
             var query = (from product in this._appDbContext.Products
              from dr in this._appDbContext.DetailsReceipts
              from r in this._appDbContext.Receipts
@@ -94,7 +95,7 @@ namespace LibraryApi.Models.services
              select new { id = product.id, productname = product.name, qty = dr.qty }).AsEnumerable().GroupBy(c => c.id).Take(10);
 
 
-
+            // loop to get the total sum of qty for each product
             foreach (var item in query)
             {
                 var groupKey = item.Key;
@@ -111,6 +112,8 @@ namespace LibraryApi.Models.services
                 }
                 p.qty = qty;
                 products.Add(p);
+                // order by qty 
+                products = products.OrderByDescending(e => e.qty).ToList();
 
             }
 
