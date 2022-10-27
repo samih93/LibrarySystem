@@ -34,13 +34,19 @@ namespace LibraryApi.services.detailsreceipt
 
         public async Task refundItems(List<DetailsReceipt> detailsReceipts)
         {
-            
+            double refundprice = 0;
                 foreach (var item in detailsReceipts)
                 {
                     _appDbContext.DetailsReceipts.Remove(item);
+                refundprice += item.Product!.price * item.qty;
                 }
-            
+
+            Receipt? receipt = _appDbContext.Receipts.Find(detailsReceipts[0].receiptId);
+            receipt.receiptPrice -= refundprice; 
+
+            _appDbContext.Entry(receipt).State = EntityState.Modified;
             await _appDbContext.SaveChangesAsync();
+
         }
     }
 }
